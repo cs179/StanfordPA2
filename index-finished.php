@@ -40,7 +40,6 @@
                 <ul data-role="listview" id="tweet-list">
                 <?php 
 					while($row = mysql_fetch_array($result)) {
-						echo($row["title"]);
 						//$comments = mysql_query("SELECT * FROM comments WHERE pid =".$row['pid']); 
 						echo('<h2>'.$row["title"].'</h2>');
 						//echo($row["description"].'<br/>');
@@ -50,7 +49,7 @@
                 </ul><!-- list for holding tweets -->
                 
             </div>
-            
+            <!-- Comment for git to find -->
         </div><!-- /page -->
     
     </body>
