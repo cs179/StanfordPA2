@@ -49,7 +49,6 @@
                 </ul><!-- list for holding tweets -->
                 
             </div>
-            <!-- Comment for git to find -->
         </div><!-- /page -->
     
     </body>
