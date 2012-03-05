@@ -29,27 +29,57 @@
         
         <div data-role="page" id="page_1">
         
-            <div data-role="header" data-id="header" data-position="fixed"  data-add-back-btn="true" >
+            <div data-role="header" data-id="header" data-position="fixed">
                 <h1>Ben B.'s Book Club</h1>
+                <a href="index.html#page_2" data-icon="arrow-r" data-theme="b" class="ui-btn-right">Add Book</a>
             </div><!-- /header -->
             
             <div data-role="content">
                 
-                <h5>Reading Suggestions </h5>
+                <h2 class="heading">Reading Suggestions </h2>
                 
-                <ul data-role="listview" id="tweet-list">
+                <ul data-role="listview" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
                 <?php 
 					while($row = mysql_fetch_array($result)) {
 						//$comments = mysql_query("SELECT * FROM comments WHERE pid =".$row['pid']); 
-						echo('<h2>'.$row["title"].'</h2>');
-						//echo($row["description"].'<br/>');
-						//echo('<a href=details.php?pid='.$row["pid"].'>Read '.mysql_num_rows($comments).' comment(s) <br/><br/>');
+
+						echo('<li class="book-listing ui-li ui-li-static ui-li-has-thumb">');
+
+						echo('<img src="'.$row["url"].'" class="ui-corner-tl ui-li-thumb">');
+						echo('<h3 class="ui-li-heading">'.$row["title"].'</h3>');
+						echo('<p class="ui-li-desc">'.$row["author"].'</p>');
+						
+						echo('</li>');
 					}
 				?>
-                </ul><!-- list for holding tweets -->
+                </ul><!-- list of books -->
+                
+
                 
             </div>
         </div><!-- /page -->
+        
+        <div data-role="page" id="page_2">
+        	<div id="input-form">
+				<form action="addbook.php" method="post">
+				<div data-role="fieldcontain" class="ui-fieldcontain ui-body ui-br">
+					<label for="title-input" class="ui-input-text">Title: </label>
+					<input type="text" name="title" id="title-input" value class="ui-input-text" 
+						ui-body-c ui-corner-all ui-shadow-inset">
+				</div>
+				<div data-role="fieldcontain" class="ui-fieldcontain ui-body ui-br">
+					<label for="author-input" class="ui-input-text">Author: </label>
+					<input type="text" name="author" id="author-input" value class="ui-input-text" 
+						ui-body-c ui-corner-all ui-shadow-inset">
+				</div>
+				<div data-role="fieldcontain" class="ui-fieldcontain ui-body ui-br">
+					<label for="url-input" class="ui-input-text">URL: </label>
+					<input type="url" name="url" id="url-input" value class="ui-input-text" 
+						ui-body-c ui-corner-all ui-shadow-inset">
+				</div>
+				</form>
+			</div>
+        </div><!--- /page -->
     
     </body>
 </html>
