@@ -21,7 +21,7 @@
         });
         </script>
         <script src="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js" type="text/javascript"></script>
-       	<!--<script src="site.js" type="text/javascript"></script> -->
+       	<script src="site.js" type="text/javascript"></script>
         <link href="style.css" rel="stylesheet" type="text/css">
     </head>
     <body>
@@ -38,16 +38,19 @@
                 
                 <h2 class="heading">Reading Suggestions </h2>
                 
-                <ul data-role="listview" id="book-list" data-inset="true">
+                <ul data-role="listview" id="book-list" data-inset="true" data-split-theme="d" 
+                	data-split-icon="delete">
                 <?php 
 					while($row = mysql_fetch_array($result)) {
 						//$comments = mysql_query("SELECT * FROM comments WHERE pid =".$row['pid']); 
 
-						echo('<li class="book-listing">');
-
+						echo('<li class="book-listing" id=book_'.$row['uid'].'>');
+						echo('<a>');
 						echo('<img src="'.$row["image_url"].'">');
 						echo('<h3>'.$row["title"].'</h3>');
 						echo('<p>'.$row["author"].'</p>');
+						echo('</a>');
+						echo('<a class="del-btn" id=del-btn_'.$row['uid'].' data-uid='.$row['uid'].'></a>');
 						
 						echo('</li>');
 					}
