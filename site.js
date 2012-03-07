@@ -12,21 +12,20 @@ $(document).ready(function() {  // wait for DOM ready event
     	var title = $("#title-input").val();
     	var author = $("#author-input").val();
     	var image_url = $("#image_url-input").val();
-		console.log(title);
-		console.log(author);
-		console.log(image_url);
     	
     	//let's ajax this shit
     	$.ajax({
     		url: "add-book.php",
     		type: "post",
     		data: {title:title, author:author, image_url:image_url},
-    		success: function() {
-				var new_book = $('<li class="book-listing">');
-			
-					new_book.append($('<img />').attr('src', image_url));
-					new_book.append($('<h3></h3>').text(title));				
-					new_book.append($('<p></p>').text(author));			
+    		success: function(uid) {
+				var new_book = $('<li class="book-listing"/>')
+					var list_shell = $('<a />');
+						list_shell.append($('<img />').attr('src', image_url));
+						list_shell.append($('<h3></h3>').text(title));				
+						list_shell.append($('<p></p>').text(author));	
+					new_book.append(list_shell);
+					new_book.append($('<a class="del-btn"/>').attr('data-uid', uid));
 					book_list.append(new_book);
 				
 				book_list.listview('refresh');
@@ -44,27 +43,27 @@ $(document).ready(function() {  // wait for DOM ready event
      */
      
      var delbtns = $(".del-btn");
-     delbtns.click(function() {
+     var book_list = $("#book-list");
+
+     delbtns.live('click', function() {
      	//get the uid of the button
      	var uid_to_del = $(this).data("uid");
-     	
+     	var book_to_del = $(this).parent('li');
+     	console.log(uid_to_del);
      	//make an ajax call
      	$.ajax({
-     		url: "add-book.php",
+     		url: "del-book.php",
     		type: "post",
-    		data: {title:title, author:author, image_url:image_url},
+    		data: {uid:uid_to_del},
     		success: function() {
-				var new_book = $('<li class="book-listing">');
-			
-					new_book.append($('<img />').attr('src', image_url));
-					new_book.append($('<h3></h3>').text(title));				
-					new_book.append($('<p></p>').text(author));			
-					book_list.append(new_book);
-				
+				book_to_del.remove();
 				book_list.listview('refresh');
     		}
-     	
+    		
      	});
+     	
+		return false; 
+     	
      });
      
      

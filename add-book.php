@@ -3,6 +3,7 @@
 	require("common.php");
 	
 	
+	
 	if (isset($_POST['author']) and isset($_POST['title']) and isset($_POST['image_url'])) {
 	
 		$title = mysql_real_escape_string($_POST['title']);
@@ -11,12 +12,12 @@
 
 	$query = "INSERT INTO books (title, author, image_url) VALUES('".$title."','".$author."','".$image_url."')";
 
-	//var_dump($query);
 	
 	$result = mysql_query($query);
+	echo(mysql_insert_id());
 	
 	}
 	
 	// Redirect to homepage
-	header("Location: index.php");
+	//header("Location: index.php");
 ?>
