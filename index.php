@@ -36,7 +36,7 @@
             
             <div data-role="content" class="centered-object">
                 
-                <h2 class="heading">Reading Suggestions </h2>
+                <h2 class="page-heading">Reading Suggestions </h2>
                 
                 <ul data-role="listview" id="book-list" data-inset="true" data-split-theme="d" 
                 	data-split-icon="delete">
@@ -44,10 +44,10 @@
 					while($row = mysql_fetch_array($result)) {
 						//$comments = mysql_query("SELECT * FROM comments WHERE pid =".$row['pid']); 
 
-						echo('<li class="book-listing" id=book_'.$row['uid'].'>');
+						echo('<li class="book-listing" data-uid='.$row['uid'].'>');
 						echo('<a>');
 						echo('<img src="'.$row["image_url"].'">');
-						echo('<h3>'.$row["title"].'</h3>');
+						echo('<h3 class="book-title">'.$row["title"].'</h3>');
 						echo('<p>'.$row["author"].'</p>');
 						echo('</a>');
 						echo('<a class="del-btn" id=del-btn_'.$row['uid'].' data-uid='.$row['uid'].'></a>');
@@ -56,18 +56,18 @@
 					}
 				?>
                 </ul><!-- list of books -->
-                
-
-                
             </div>
         </div><!-- /page -->
+        
+        <!--- add book page --->   
         <div data-role="page" id="page_2">
             <div data-role="header" data-id="header" data-position="fixed">
                 <h1>Ben B.'s Book Club</h1>
                 <a href="index.html#page_1" data-icon="arrow-l" data-theme="b" class="ui-btn-left">View Books</a>
             </div><!-- /header -->
         	<div id="add-book" class="centered-object">
-				<form action="add-book.php" method="post">
+        		<h2 class="page-heading"> Add your favorite book </h2>
+				<form action="add-book.php" id="add-book-form" method="post">
 				<div data-role="fieldcontain" class="ui-fieldcontain ui-body ui-br">
 					<label for="title-input" class="ui-input-text">Title: </label>
 					<input type="text" name="title" id="title-input" value class="ui-input-text" 
@@ -82,6 +82,28 @@
 					<label for="image_url-input" class="ui-input-text">URL: </label>
 					<input type="url" name="image_url" id="image_url-input" value class="ui-input-text" 
 						ui-body-c ui-corner-all ui-shadow-inset">
+				</div>
+				<div class="ui-btn" >
+					<input type="submit" id="add-book-submit" value="make it so" data-inline="true">
+				</div>
+				</form>
+			</div>
+        </div><!--- / add book page -->
+        
+        <!--- comments page --->
+        
+         <div data-role="page" id="page_3">
+            <div data-role="header" data-id="header" data-position="fixed">
+                <h1>Ben B.'s Book Club</h1>
+                <a href="index.html#page_1" data-icon="arrow-l" data-theme="b" class="ui-btn-left">View Books</a>
+            </div><!-- /header -->
+        	<div id="add-comment" class="centered-object">
+        	    <h2 class="page-heading" id="comment-heading">Comments for </h2>
+
+				<form action="add-comment.php" method="post">
+				<div data-role="fieldcontain">
+					<label for="title-input">Title: </label>
+					<input type="text" name="title" id="title-input">
 				</div>
 				<div class="ui-btn" >
 					<input type="submit" id="add-book-submit" value="make it so" data-inline="true">

@@ -19,10 +19,10 @@ $(document).ready(function() {  // wait for DOM ready event
     		type: "post",
     		data: {title:title, author:author, image_url:image_url},
     		success: function(uid) {
-				var new_book = $('<li class="book-listing"/>')
+				var new_book = $('<li class="book-listing"/>').attr('data-uid', uid);
 					var list_shell = $('<a />');
 						list_shell.append($('<img />').attr('src', image_url));
-						list_shell.append($('<h3></h3>').text(title));				
+						list_shell.append($('<h3></h3>').text(title)).attr('class', 'book-title');				
 						list_shell.append($('<p></p>').text(author));	
 					new_book.append(list_shell);
 					new_book.append($('<a class="del-btn"/>').attr('data-uid', uid));
@@ -66,18 +66,21 @@ $(document).ready(function() {  // wait for DOM ready event
      	
      });
      
-     
-     
-     
-     
-     
-     
-     
-     /*
-      *						<div data-role="foo">
-						$('#book').jqmData(key, value);
-						$('#book').jqmData(key); // return value
-						$('#book').jqmData('role') // 'foo'
-      *
-      */
+	/*
+	 * Bind the book listings for commenting
+	 *
+	 */
+	 
+	 var book_listings = $(".book-listing");
+	 
+	 book_listings.live('click', function() {
+	 	//get the title and uid of the book
+	 	var title = $(this).find('.book-title').text();
+	 	$.mobile.changePage("#page_3");
+	 	
+	 	//find the heading and make it have the title
+	 	$("#comment-heading").text("Comments for " + title);
+	 	
+	 });
+
 });
