@@ -86,23 +86,59 @@ $(document).ready(function() {  // wait for DOM ready event
 	 	
 	 	//grab a reference to the comment list and build it 
 	 	
+	 	var comment_list = $("#comment-list");
+	 	
+	 	//do an ajax call to get all of the comments
+	 	
+	 	$.ajax({
+	 		url     : "get-comments.php",
+	 		type    : "post",
+	 		datatype: "json",
+	 		data    : {book_uid:book_uid},
+	 		success : function(commentsJSON) {
+	 			var comments = $.parseJSON(commentsJSON);
+	 			console.log(comments);
+	 			for (x in comments) {
+	 				var comment = makeComment(comments[x], comment_list);
+	 			}
+	 		}
+	 	});
+	 	
 	 });
 	 
 	 
 	//handle add-comment form submit
 	$("#add-comment_form").submit(function() {
-		console.log("caught form submit");
+		
+		//Aquire the objects we need
 		var comment = $("#comment-input").val();
 		var book_uid = $("#page_3").data("book_uid");
+		var comment_list = $("#comment-list");
+
+		//add the comment to the database
 		$.ajax({
 			url  : "add-comment.php",
 			type : "post",
 			data : {comment:comment, book_uid:book_uid},
-			success : function(uid) {
-				console.log("ajax success");
+			success : function() {
+				makeComment(comment, comment_list);
 			}
 		});
 		return false;
 	});
 
 });
+
+
+/*
+ * Takes a string and creates an HTML list element formatted like a comment
+ *
+ */
+ 
+ function makeComment(comment, comment_list){
+ 	var new_comment = $("<li />");
+ 	new_comment.text(comment);
+ 	comment_list.append(new_comment);
+ 	comment_list.listview();
+ 	comment_list.listview('refresh');
+ }

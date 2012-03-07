@@ -111,12 +111,7 @@
 				</form>
 				
 				<div id="comment-list">
-					<ul data-role="listview" id="book-list" data-inset="true">
-                	
-                	
-                		<li> comment 1 </li>
-					
-                	</ul>
+					<ul data-role="listview" id="book-list" data-inset="true"> </ul>
 				</div>
 			</div>
         </div><!--- /page -->
