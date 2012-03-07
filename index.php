@@ -37,18 +37,20 @@
             <div data-role="content" class="centered-object">
                 
                 <h2 class="page-heading">Reading Suggestions </h2>
+                <h4 class="page-heading">Click a title to view comments or click a cover to favorite </h4>
                 
-                <ul data-role="listview" id="book-list" data-inset="true" data-split-theme="d" 
+                <ul data-role="listview" id="book-list" data-split-theme="d"   data-inset="true" 
                 	data-split-icon="delete">
                 <?php 
 					while($row = mysql_fetch_array($result)) {
 						//$comments = mysql_query("SELECT * FROM comments WHERE pid =".$row['pid']); 
-
+						
 						echo('<li class="book-listing" data-uid='.$row['uid'].'>');
 						echo('<a>');
-						echo('<img src="'.$row["image_url"].'">');
-						echo('<h3 class="book-title">'.$row["title"].'</h3>');
-						echo('<p>'.$row["author"].'</p>');
+						echo('<img class="thumb-nail" src="'.$row["image_url"].'">');
+						echo('<h3 class="book-title comment-clickable">'.$row["title"].'</h3>');
+						echo('<p class="comment-clickable">'.$row["author"].'</p>');
+						//echo('<a href="index.html#page3" class="comment-notice"> join the conversation </a>');
 						echo('</a>');
 						echo('<a class="del-btn" id=del-btn_'.$row['uid'].' data-uid='.$row['uid'].'></a>');
 						
