@@ -100,15 +100,24 @@
         	<div id="add-comment" class="centered-object">
         	    <h2 class="page-heading" id="comment-heading">Comments for </h2>
 
-				<form action="add-comment.php" method="post">
+				<form action="add-comment.php" id="add-comment_form" method="post">
 				<div data-role="fieldcontain">
-					<label for="title-input">Title: </label>
-					<input type="text" name="title" id="title-input">
+					<label for="comment-input">Add a comment: </label>
+					<input type="text" name="comment" id="comment-input">
 				</div>
 				<div class="ui-btn" >
-					<input type="submit" id="add-book-submit" value="make it so" data-inline="true">
+					<input type="submit" id="add-comment-submit" value="do it" data-inline="true">
 				</div>
 				</form>
+				
+				<div id="comment-list">
+					<ul data-role="listview" id="book-list" data-inset="true">
+                	
+                	
+                		<li> comment 1 </li>
+					
+                	</ul>
+				</div>
 			</div>
         </div><!--- /page -->
     

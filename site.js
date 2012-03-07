@@ -76,11 +76,33 @@ $(document).ready(function() {  // wait for DOM ready event
 	 book_listings.live('click', function() {
 	 	//get the title and uid of the book
 	 	var title = $(this).find('.book-title').text();
-	 	$.mobile.changePage("#page_3");
+	 	var book_uid = $(this).data("uid");
 	 	
+	 	$.mobile.changePage("#page_3");
+	 	$("#page_3").data({book_uid: book_uid});
+	 	$("#page_3").data({title: title});
 	 	//find the heading and make it have the title
 	 	$("#comment-heading").text("Comments for " + title);
 	 	
+	 	//grab a reference to the comment list and build it 
+	 	
 	 });
+	 
+	 
+	//handle add-comment form submit
+	$("#add-comment_form").submit(function() {
+		console.log("caught form submit");
+		var comment = $("#comment-input").val();
+		var book_uid = $("#page_3").data("book_uid");
+		$.ajax({
+			url  : "add-comment.php",
+			type : "post",
+			data : {comment:comment, book_uid:book_uid},
+			success : function(uid) {
+				console.log("ajax success");
+			}
+		});
+		return false;
+	});
 
 });
