@@ -1,5 +1,4 @@
 $(document).ready(function() {  // wait for DOM ready event
-
     // grab a reference to the form
     var form = $("#add-book");
     
@@ -7,32 +6,37 @@ $(document).ready(function() {  // wait for DOM ready event
     
     
     form.submit(function () {
-    	var title = $("#title-input");
-    	var author = $("#author-input");
-    	var image_url = $("image_url-input");
+    	var title = $("#title-input").val();
+    	var author = $("#author-input").val();
+    	var image_url = $("#image_url-input").val();
+
     	
     	//let's ajax this shit
     	$.ajax({
     		url: "add-book.php",
     		type: "post",
-    		data: {title:title, author:author, image_url:image_url}
+    		data: {title:title, author:author, image_url:image_url},
+    		success: function() {
+				var new_book = $('<li class="book-listing">');
+			
+					new_book.append($('<img />').attr('src', image_url));
+					new_book.append($('<h3></h3>').text(title));				
+					new_book.append($('<p></p>').text(author));			
+					book_list.append(new_book);
+				
+				book_list.listview('refresh');
+    		}
     	});
     	
+    	
     	//now we pray it got to the server and update the page accordingly
+    	//*** I never added closing tags because I thought that was what I was supposed to do
     	
-    	var new_book = $('<li class="book-listing ui-li ui-li-static ui-li-has-thumb">');
+    		
     	
-    	var new_title = $('<h3 class="ui-li-heading">').text(title.val());
     	
-    	var new_author = $('<p class="ui-li-desc">').text(author.val());
-    	
-    	var new_image_url = $('<img class="ui-corner-tl ui-li-thumb">').src(image_url.val());
-    	);
-    	
-
-    }
-            
-    // get a reference to the list of posts
-    var list = $("div#posts-list");
-
+		return false; 
+		
+    });
+    
 });

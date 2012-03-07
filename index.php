@@ -21,8 +21,8 @@
         });
         </script>
         <script src="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js" type="text/javascript"></script>
-        <script src="site.js" type="text/javascript"></script>
-        <script src="exercise-finished.js" type="text/javascript"></script>
+       	<!--<script src="site.js" type="text/javascript"></script> -->
+        <link href="style.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         
@@ -34,21 +34,20 @@
                 <a href="index.html#page_2" data-icon="arrow-r" data-theme="b" class="ui-btn-right">Add Books</a>
             </div><!-- /header -->
             
-            <div data-role="content">
+            <div data-role="content" class="centered-object">
                 
                 <h2 class="heading">Reading Suggestions </h2>
                 
-                <ul data-role="listview" id="book-list" data-inset="true" class="ui-listview 
-                	ui-listview-inset ui-corner-all ui-shadow">
+                <ul data-role="listview" id="book-list" data-inset="true">
                 <?php 
 					while($row = mysql_fetch_array($result)) {
 						//$comments = mysql_query("SELECT * FROM comments WHERE pid =".$row['pid']); 
 
-						echo('<li class="book-listing ui-li ui-li-static ui-li-has-thumb">');
+						echo('<li class="book-listing">');
 
-						echo('<img src="'.$row["image_url"].'" class="ui-corner-tl ui-li-thumb">');
-						echo('<h3 class="ui-li-heading">'.$row["title"].'</h3>');
-						echo('<p class="ui-li-desc">'.$row["author"].'</p>');
+						echo('<img src="'.$row["image_url"].'">');
+						echo('<h3>'.$row["title"].'</h3>');
+						echo('<p>'.$row["author"].'</p>');
 						
 						echo('</li>');
 					}
@@ -64,8 +63,8 @@
                 <h1>Ben B.'s Book Club</h1>
                 <a href="index.html#page_1" data-icon="arrow-l" data-theme="b" class="ui-btn-left">View Books</a>
             </div><!-- /header -->
-        	<div id="add-book">
-				<form action="addbook.php" method="post">
+        	<div id="add-book" class="centered-object">
+				<form action="add-book.php" method="post">
 				<div data-role="fieldcontain" class="ui-fieldcontain ui-body ui-br">
 					<label for="title-input" class="ui-input-text">Title: </label>
 					<input type="text" name="title" id="title-input" value class="ui-input-text" 
@@ -78,8 +77,11 @@
 				</div>
 				<div data-role="fieldcontain" class="ui-fieldcontain ui-body ui-br">
 					<label for="image_url-input" class="ui-input-text">URL: </label>
-					<input type="url" name="url" id="url-input" value class="ui-input-text" 
+					<input type="url" name="image_url" id="image_url-input" value class="ui-input-text" 
 						ui-body-c ui-corner-all ui-shadow-inset">
+				</div>
+				<div class="ui-btn" >
+					<input type="submit" id="add-book-submit" value="make it so" data-inline="true">
 				</div>
 				</form>
 			</div>
