@@ -22,7 +22,7 @@
         <div data-role="page" id="page_1">
         
             <div data-role="header" data-id="header" data-position="fixed">
-                <h1>Ben B.'s Book Club</h1>
+                <h1>Book Club</h1>
                 <a href="index.html#page_2" data-icon="arrow-r" data-theme="b" class="ui-btn-right">Add Books</a>
             </div><!-- /header -->
             
@@ -41,7 +41,7 @@
         <!--- add book page --->   
         <div data-role="page" id="page_2">
             <div data-role="header" data-id="header" data-position="fixed">
-                <h1>Ben B.'s Book Club</h1>
+                <h1>Book Club</h1>
                 <a href="index.html#page_1" data-icon="arrow-l" data-theme="b" class="ui-btn-left">View Books</a>
             </div><!-- /header -->
         	<div id="add-book" class="centered-object">
