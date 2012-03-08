@@ -11,7 +11,6 @@ $(document).ready(function() {  // wait for DOM ready event
 			url:"get-books.php",
 			success: function(booksJSON){
 				var books=JSON.parse(booksJSON);
-				console.log(books);
 				for (x in books) {
 					var book = books[x];
 					var new_book = makeBook(book['title'], book['author'], 
@@ -66,7 +65,6 @@ $(document).ready(function() {  // wait for DOM ready event
      	//get the uid of the button
      	var uid_to_del = $(this).data("uid");
      	var book_to_del = $(this).parent('li');
-     	console.log(uid_to_del);
      	//make an ajax call
      	$.ajax({
      		url: "del-book.php",
@@ -112,7 +110,6 @@ $(document).ready(function() {  // wait for DOM ready event
 		var back_btns = $(".ui-btn-left");
 		back_btns.live('click', function(){
 			$.mobile.changePage("#page_1",{reverse:true});
-			console.log("reverse applied");
 		});
 		
 	/*
@@ -148,7 +145,6 @@ $(document).ready(function() {  // wait for DOM ready event
 	 		data    : {book_uid:book_uid},
 	 		success : function(commentsJSON) {
 	 			var comments = $.parseJSON(commentsJSON);
-	 			console.log(comments);
 	 			for (x in comments) {
 	 				var comment = makeComment(comments[x], comment_list);
 	 			}

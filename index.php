@@ -73,7 +73,7 @@
         
          <div data-role="page" id="page_3">
             <div data-role="header" data-id="header" data-position="fixed">
-                <h1>Ben B.'s Book Club</h1>
+                <h1>Book Club</h1>
                 <a href="index.html#page_1" data-icon="arrow-l" data-theme="b" class="ui-btn-left">View Books</a>
             </div><!-- /header -->
         	<div id="add-comment" class="centered-object">
