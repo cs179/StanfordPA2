@@ -1,11 +1,3 @@
-<?php
-
-	require("common.php");
-	$query = "SELECT * FROM books";
-	$result = mysql_query($query);
-
-?>
-
 <!DOCTYPE html>
 <html>
     <head>

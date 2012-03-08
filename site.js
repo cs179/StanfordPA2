@@ -208,7 +208,8 @@ $(document).ready(function() {  // wait for DOM ready event
  
  function makeBook(title, author, image_url, uid){
  	var favorites = localStorage['favorites'];
- 	favorites = JSON.parse(favorites);
+ 	if (favorites==null){favorites=[];}
+ 	else{favorites = JSON.parse(favorites);}
 	var new_book = $('<li class="book-listing" data-uid='+uid+'/>').attr('data-uid', uid);
 	var list_shell = $('<a />');
 	var fav = $.inArray(uid,favorites);
@@ -226,20 +227,3 @@ $(document).ready(function() {  // wait for DOM ready event
 	return new_book;
  }
  
-/*
-while($row = mysql_fetch_array($result)) {
-	//$comments = mysql_query("SELECT * FROM comments WHERE pid =".$row['pid']); 
-	
-	echo('<li class="book-listing" data-uid='.$row['uid'].'>');
-	echo('<a>');
-	echo('<img class="thumb-nail" src="'.$row["image_url"].'">');
-	echo('<h3 class="book-title comment-clickable">'.$row["title"].'</h3>');
-	echo('<p class="comment-clickable">'.$row["author"].'</p>');
-	//echo('<a href="index.html#page3" class="comment-notice"> join the conversation </a>');
-	echo('</a>');
-	echo('<a class="del-btn" id=del-btn_'.$row['uid'].' data-uid='.$row['uid'].'></a>');
-	
-	echo('</li>');
-}
-
- */
