@@ -1,0 +1,18 @@
+.centered-object {
+	margin-left:auto;
+	margin-right:auto;
+
+
+}
+
+.comment-notice {
+	margin-left:auto;
+	float:right;
+	font-family:Verdana;
+	font-weight:bold;
+}
+
+.favorte {
+	color:FFFF00;
+
+}

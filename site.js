@@ -1,5 +1,28 @@
 $(document).ready(function() {  // wait for DOM ready event		
 
+	/*
+	 * Set up the recommendations
+	 *
+	 */
+		var book_list = $("#book-list");
+		book_list.listview();
+		
+		$.ajax({
+			url:"get-books.php",
+			success: function(booksJSON){
+				var books=JSON.parse(booksJSON);
+				console.log(books);
+				for (x in books) {
+					var book = books[x];
+					var new_book = makeBook(book['title'], book['author'], 
+						book['image_url'], book['uid']);
+					book_list.append(new_book);
+				}
+				book_list.listview('refresh');
+			}
+		
+		});
+
     /*
      * Capture the form submit 
      *
@@ -152,7 +175,6 @@ $(document).ready(function() {  // wait for DOM ready event
 		
 	 	
 		 if (img.attr('src')!="star_icon.png"){
-			img.data('src', img.attr('src'));
 			img.attr('src', "star_icon.png");
 			favorites.push(uid);
 			localStorage['favorites'] = JSON.stringify(favorites);
@@ -185,14 +207,39 @@ $(document).ready(function() {  // wait for DOM ready event
  }
  
  function makeBook(title, author, image_url, uid){
-	var new_book = $('<li class="book-listing"/>').attr('data-uid', uid);
+ 	var favorites = localStorage['favorites'];
+ 	favorites = JSON.parse(favorites);
+	var new_book = $('<li class="book-listing" data-uid='+uid+'/>').attr('data-uid', uid);
 	var list_shell = $('<a />');
-		list_shell.append($('<img />').attr('src', image_url));
-		list_shell.append($('<h3></h3>').text(title)).attr('class', 'book-title');				
-		list_shell.append($('<p></p>').text(author));	
-	new_book.append(list_shell);
+	var fav = $.inArray(uid,favorites);
+		if(fav!=-1){ 
+			var img = $('<img class="thumb-nail"/>').attr('src', "star_icon.png");
+			list_shell.append(img); }
+		else{ 
+			var img = $('<img class="thumb-nail"/>').attr('src', image_url);
+			list_shell.append(img);}
+		img.data('src', image_url);
+		list_shell.append($('<h3 class="book-title comment-clickable"></h3>').text(title)).attr('class', 'book-title');				
+		list_shell.append($('<p class="comment-clickable"></p>').text(author));	
+		new_book.append(list_shell);
 	new_book.append($('<a class="del-btn"/>').attr('data-uid', uid));
-	console.log(new_book);
 	return new_book;
  }
  
+/*
+while($row = mysql_fetch_array($result)) {
+	//$comments = mysql_query("SELECT * FROM comments WHERE pid =".$row['pid']); 
+	
+	echo('<li class="book-listing" data-uid='.$row['uid'].'>');
+	echo('<a>');
+	echo('<img class="thumb-nail" src="'.$row["image_url"].'">');
+	echo('<h3 class="book-title comment-clickable">'.$row["title"].'</h3>');
+	echo('<p class="comment-clickable">'.$row["author"].'</p>');
+	//echo('<a href="index.html#page3" class="comment-notice"> join the conversation </a>');
+	echo('</a>');
+	echo('<a class="del-btn" id=del-btn_'.$row['uid'].' data-uid='.$row['uid'].'></a>');
+	
+	echo('</li>');
+}
+
+ */

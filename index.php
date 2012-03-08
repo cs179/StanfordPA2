@@ -41,22 +41,7 @@
                 
                 <ul data-role="listview" id="book-list" data-split-theme="d"   data-inset="true" 
                 	data-split-icon="delete">
-                <?php 
-					while($row = mysql_fetch_array($result)) {
-						//$comments = mysql_query("SELECT * FROM comments WHERE pid =".$row['pid']); 
-						
-						echo('<li class="book-listing" data-uid='.$row['uid'].'>');
-						echo('<a>');
-						echo('<img class="thumb-nail" src="'.$row["image_url"].'">');
-						echo('<h3 class="book-title comment-clickable">'.$row["title"].'</h3>');
-						echo('<p class="comment-clickable">'.$row["author"].'</p>');
-						//echo('<a href="index.html#page3" class="comment-notice"> join the conversation </a>');
-						echo('</a>');
-						echo('<a class="del-btn" id=del-btn_'.$row['uid'].' data-uid='.$row['uid'].'></a>');
-						
-						echo('</li>');
-					}
-				?>
+
                 </ul><!-- list of books -->
             </div>
         </div><!-- /page -->
